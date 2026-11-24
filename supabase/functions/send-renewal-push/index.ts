@@ -19,8 +19,23 @@ function getDaysUntil(dateStr: string): number {
 
 Deno.serve(async (req: Request) => {
   try {
-    const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
+    // 0. Require secret bearer authorization so public callers cannot spam push dispatches
+    const cronSecret = Deno.env.get("CRON_SECRET")?.trim();
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+    const expectedSecret = cronSecret || serviceRoleKey;
+    const authHeader = req.headers.get("authorization") ?? "";
+    const providedToken = authHeader.startsWith("Bearer ")
+      ? authHeader.slice(7).trim()
+      : "";
+
+    if (!expectedSecret || !providedToken || providedToken !== expectedSecret) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 
     if (!supabaseUrl || !serviceRoleKey) {
       return new Response(

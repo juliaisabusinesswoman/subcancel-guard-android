@@ -30,6 +30,15 @@ interface AccountSettingsScreenProps {
   onOpenProModal: () => void;
 }
 
+function escapeCsvCell(value: string | number | null | undefined): string {
+  const raw = value === null || value === undefined ? "" : String(value);
+  const str = /^[=+\-@\t\r]/.test(raw) ? `'${raw}` : raw;
+  if (/[",\n\r]/.test(str)) {
+    return `"${str.replace(/"/g, '""')}"`;
+  }
+  return str;
+}
+
 export function AccountSettingsScreen({
   subscriptions,
   onOpenProModal,
@@ -175,14 +184,16 @@ export function AccountSettingsScreen({
         "Created At",
       ];
       const rows = subscriptions.map((sub) => [
-        `"${sub.name.replace(/"/g, '""')}"`,
-        `"${sub.category.replace(/"/g, '""')}"`,
-        Number(sub.cost).toFixed(2),
-        sub.billing_cycle,
-        normalizeToMonthly(Number(sub.cost), sub.billing_cycle).toFixed(2),
-        sub.renewal_date,
-        `"${(sub.cancel_url || "").replace(/"/g, '""')}"`,
-        sub.created_at,
+        escapeCsvCell(sub.name),
+        escapeCsvCell(sub.category),
+        escapeCsvCell(Number(sub.cost).toFixed(2)),
+        escapeCsvCell(sub.billing_cycle),
+        escapeCsvCell(
+          normalizeToMonthly(Number(sub.cost), sub.billing_cycle).toFixed(2)
+        ),
+        escapeCsvCell(sub.renewal_date),
+        escapeCsvCell(sub.cancel_url || ""),
+        escapeCsvCell(sub.created_at),
       ]);
       content = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
     }
