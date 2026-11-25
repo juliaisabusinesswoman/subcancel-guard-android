@@ -2,13 +2,17 @@
   "expo": {
     "name": "SubCancel Guard",
     "slug": "subcancel-guard-mobile",
+    "owner": "juliaisabusinesswomans-team",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "scheme": "subcancelguard",
-    "platforms": ["android", "web"],
+    "platforms": [
+      "android",
+      "web"
+    ],
     "splash": {
       "image": "./assets/icon.png",
       "resizeMode": "contain",
@@ -57,7 +61,13 @@
           "color": "#b8860b",
           "defaultChannel": "renewal-urgent"
         }
-      ]
-    ]
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d6e497f4-22ba-4bdf-b4c3-0dd51f156703"
+      }
+    }
   }
 }
