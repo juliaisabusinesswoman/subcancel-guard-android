@@ -1,4 +1,5 @@
 import * as Clipboard from "expo-clipboard";
+import * as Crypto from "expo-crypto";
 
 // Unambiguous Crockford-style alphabet (excludes 0/O and 1/I/L to avoid visual confusion)
 const RECOVERY_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -8,14 +9,7 @@ const RECOVERY_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
  * SCG-XXXX-XXXX-XXXX (60 bits of entropy, >1.15 quintillion combinations).
  */
 export function generateVaultRecoveryKey(): string {
-  const bytes = new Uint8Array(12);
-  if (typeof globalThis !== "undefined" && globalThis.crypto?.getRandomValues) {
-    globalThis.crypto.getRandomValues(bytes);
-  } else {
-    for (let i = 0; i < bytes.length; i++) {
-      bytes[i] = Math.floor(Math.random() * 256);
-    }
-  }
+  const bytes = Crypto.getRandomBytes(12);
 
   let chars = "";
   for (let i = 0; i < bytes.length; i++) {
