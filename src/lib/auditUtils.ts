@@ -18,43 +18,43 @@ export interface CategoryOverlap {
 }
 
 export const CATEGORY_COLORS: Record<string, string> = {
-  Entertainment: "#e11d48", // Crimson Rose
+  Entertainment: "#dc2626", // True Red
+  Delivery: "#f97316", // Bright Orange
+  Shopping: "#eab308", // Bright Yellow / Gold
+  "News & Reading": "#92400e", // Espresso Brown
+  "Health & Fitness": "#16a34a", // Emerald Green
+  "Cloud Storage": "#06b6d4", // Bright Cyan
   Productivity: "#2563eb", // Royal Blue
-  "AI & Software": "#7c3aed", // Deep Violet
-  "Cloud Storage": "#0d9488", // Emerald Teal
-  "Health & Fitness": "#16a34a", // Forest Green
-  "News & Reading": "#d97706", // Warm Amber
-  Shopping: "#db2777", // Magenta Pink
-  Delivery: "#ea580c", // Burnt Orange
-  Security: "#0284c7", // Ocean Blue
-  Audio: "#c026d3", // Fuchsia
-  Utilities: "#475569", // Charcoal Slate
-  Other: "#65a30d", // Lime Olive
+  Security: "#818cf8", // Periwinkle
+  "AI & Software": "#7c3aed", // Deep Purple
+  Audio: "#ec4899", // Hot Pink
+  Utilities: "#64748b", // Cool Slate Grey
+  Other: "#d6b88d", // Warm Sand
   // Legacy aliases for any previously saved subscriptions
   "Productivity & Communication": "#2563eb",
-  "Cloud & Hosting": "#0d9488",
-  "Reading & Comics": "#d97706",
-  "News & Media": "#d97706",
+  "Cloud & Hosting": "#06b6d4",
+  "Reading & Comics": "#92400e",
+  "News & Media": "#92400e",
   Health: "#16a34a",
   Fitness: "#16a34a",
   "Fitness & Learning": "#16a34a",
-  News: "#d97706",
-  Food: "#ea580c",
+  News: "#92400e",
+  Food: "#f97316",
 };
 
 const DISTINCT_FALLBACK_PALETTE = [
-  "#e11d48",
-  "#2563eb",
+  "#dc2626",
+  "#f97316",
+  "#eab308",
+  "#92400e",
   "#16a34a",
-  "#d97706",
+  "#06b6d4",
+  "#2563eb",
+  "#818cf8",
   "#7c3aed",
-  "#0891b2",
-  "#db2777",
-  "#ea580c",
-  "#0d9488",
-  "#4f46e5",
-  "#c026d3",
-  "#65a30d",
+  "#ec4899",
+  "#64748b",
+  "#d6b88d",
 ];
 
 export function normalizeToMonthly(cost: number, billingCycle: BillingCycle): number {
